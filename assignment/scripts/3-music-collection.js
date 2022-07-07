@@ -28,3 +28,18 @@ function showCollection(array) {
 }
 
 showCollection(collection)
+
+function findByArtist(artist) {
+    let artists = []
+    for (let i = 0; i < collection.length; i++) {
+        if (artist === collection[i].artist) {
+            artists.push(artist)
+            return console.log(artists)
+        } 
+    } 
+    return console.log(artists)
+}
+
+findByArtist('Eminem')
+findByArtist('Polo G')
+findByArtist("Eric Prouty")
