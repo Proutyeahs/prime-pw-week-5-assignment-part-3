@@ -23,9 +23,14 @@ console.log(collection);
 
 function showCollection(array) {
     console.log(array.length);
+    let value = 0;
     for (let i = 0; i < array.length; i++) {
         console.log(array[i].title, "by", array[i].artist, "published in", array[i].yearPublished)
-        console.log("Tracks:", array[i].tracks)
+        console.log("Tracks:");
+        for (let i = 0; i < collection[value].tracks.length; i++) {
+            console.log(`${i+1}. ${collection[value].tracks[i].name} : ${collection[value].tracks[i].duration}`); 
+        }
+        value++;
     }
 }
 
@@ -48,11 +53,13 @@ findByArtist("Eric Prouty");
 
 function search(artist, yearPublished, trackName) {
     let collectionItems = [];
-    for (let i = 0; i < collection.length; i++) {
-        if (trackName && trackName === collection[i].tracks.name){
+    for (let track of collection) {
+        if (artist === track.artist && track.yearPublished === yearPublished && trackName && track.tracks){
             collectionItems.push(artist, yearPublished, trackName)
             return console.log(collectionItems)
         }
+    }
+    for (let i = 0; i < collection.length; i++) {
         if (artist === collection[i].artist && collection[i].yearPublished === yearPublished) {
             collectionItems.push(artist, yearPublished);
             return console.log(collectionItems);
@@ -70,3 +77,4 @@ search("Johnny Cash", 2002);
 search("ODESZA");
 search();
 search("Eric Prouty", 1993);
+search("Eric Prouty", 29, "Always This Late")
