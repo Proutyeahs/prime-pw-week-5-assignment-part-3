@@ -2,22 +2,22 @@ console.log('***** Music Collection *****')
 
 let collection = [];
 
-function addToCollection(title, artist, yearPublished, ...array) {
+function addToCollection(title, artist, yearPublished, tracks) {
     let album = {};
     album.title = title;
     album.artist = artist;
     album.yearPublished = yearPublished;
-    album.tracks = array;
+    album.tracks = tracks;
     collection.push(album);
     return console.log(album);
 }
 
-addToCollection('Self Inflicted', 'Chelsea Grin', 2016, ["Scratching and Screaming", 3.23], ["Never, Forever", 4.00]);
-addToCollection('THE GOAT', 'Polo G', 2020, ["Beautiful Pain", 2.51], ["21", 2.43], ["Martin & Gina", 2.12]);
-addToCollection('By Your Side', 'Breakbot', 2012, ["Baby Im Yours", 3.36]);
-addToCollection('American IV: The Man Comes Around', 'Johnny Cash', 2002, ["Hurt", 3.36], ["I Hung My Head", 3.53]);
-addToCollection('In Return', 'ODESZA', 2014, ["Always This Late", 2.40], ["Say My Name", 4.22], ["Sundara", 2.16], ["Sun Models", 2.40]);
-addToCollection('The Eminem Show', 'Eminem', 2002, ["Without Me", 4.50], ["Superman", 5.50], ["Till I Collapse", 4.57]);
+addToCollection('Self Inflicted', 'Chelsea Grin', 2016, [{name: "Scratching and Screaming", duration: "3:23"}, {name: "Never, Forever", duration: "4:00"}]);
+addToCollection('THE GOAT', 'Polo G', 2020, [{name: "Beautiful Pain", duration: "2:51"}, {name: "21", duration: "2:43"}, {name: "Martin & Gina", duration: "2:12"}]);
+addToCollection('By Your Side', 'Breakbot', 2012, [{name: "Baby Im Yours", duration: "3:36"}]);
+addToCollection('American IV: The Man Comes Around', 'Johnny Cash', 2002, [{name: "Hurt", duration: "3:36"}, {name: "I Hung My Head", duration: "3:53"}]);
+addToCollection('In Return', 'ODESZA', 2014, [{name: "Always This Late", duration: "2:40"}, {name: "Say My Name", duration: "4:22"}, {name: "Sundara", duration: "2:16"}, {name: "Sun Models", duration: "2:40"}]);
+addToCollection('The Eminem Show', 'Eminem', 2002, [{name: "Without Me", duration: "4:50"}, {name: "Superman", duration: "5:50"}, {name: "Till I Collapse", duration: "4:57"}]);
 
 console.log(collection);
 
@@ -25,6 +25,7 @@ function showCollection(array) {
     console.log(array.length);
     for (let i = 0; i < array.length; i++) {
         console.log(array[i].title, "by", array[i].artist, "published in", array[i].yearPublished)
+        console.log("Tracks:", array[i].tracks)
     }
 }
 
@@ -36,8 +37,8 @@ function findByArtist(artist) {
         if (artist === collection[i].artist) {
             artists.push(artist);
             return console.log(artists);
-        } 
-    } 
+        }
+    }
     return console.log(artists);
 }
 
@@ -48,8 +49,9 @@ findByArtist("Eric Prouty");
 function search(artist, yearPublished, trackName) {
     let collectionItems = [];
     for (let i = 0; i < collection.length; i++) {
-        if (trackName === collection[i].tracks) {
-            return console.log(trackName)
+        if (trackName && trackName === collection[i].tracks.name){
+            collectionItems.push(artist, yearPublished, trackName)
+            return console.log(collectionItems)
         }
         if (artist === collection[i].artist && collection[i].yearPublished === yearPublished) {
             collectionItems.push(artist, yearPublished);
